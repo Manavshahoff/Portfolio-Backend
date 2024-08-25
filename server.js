@@ -6,10 +6,15 @@ const nodemailer = require("nodemailer");
 
 // server used to send send emails
 const app = express();
-app.use(cors());
+const corsOptions = {
+  origin: 'https://manavshahoff.github.io',
+  optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use("/", router);
-app.listen(5000, () => console.log("Server Running"));
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server Running on port ${PORT}`));
 
 
 const contactEmail = nodemailer.createTransport({
